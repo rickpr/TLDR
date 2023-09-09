@@ -1,0 +1,63 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>TL;DR</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+    </head>
+    <body>
+        <!--[if lt IE 8]>
+            <p class="browserupgrade">
+            You are using an <strong>outdated</strong> browser. Please
+            <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+            your experience.
+            </p>
+        <![endif]-->
+
+        Choose values:
+        <input type="checkbox" id="privacy" name="privacy" value="privacy">
+        <label for="privacy">Privacy</label><br>
+        <input type="checkbox" id="selling-data" name="selling-data" value="Selling data">
+        <label for="selling-data">Selling data</label><br>
+        <input type="checkbox" id="data-mining" name="data-mining" value="Data mining">
+        <label for="data-mining">Data mining</label><br>
+        <input type="checkbox" id="freedom" name="freedom" value="Freedom">
+        <label for="freedom">Freedom</label><br>
+
+        Choose app:
+        <button onclick="submit('Netflix')">Netflix</button>
+        <button onclick="submit('Facebook')">Facebook</button>
+        <button onclick="submit('Google')">Google</button>
+        <button onclick="submit('Instagram')">Instagram</button>
+        <button onclick="submit('Snapchat')">Snapchat</button>
+
+        <div id="responses"></div>
+
+        <script>
+         function submit(appName) {
+             const selectedValues = ['privacy', 'selling-data', 'data-mining', 'freedom'].filter(value => document.getElementById(value).checked);
+             selectedValues.forEach(value => {
+                 fetch(`http://localhost:5000/api?app_name=${appName}&value=${selectedValues.join(',')}`)
+                     .then(function(response) { return response.json(); })
+                     .then(function(myJson) {
+                         console.log(myJson);
+                         document.getElementById('responses').innerHTML += JSON.stringify(myJson);
+                     });
+             })
+         }
+        </script>
+    </body>
+</html>
+
+
+
+
+
+    </body>
+</html>
