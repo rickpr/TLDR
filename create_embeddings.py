@@ -2,7 +2,7 @@ import openai
 import pandas as pd
 
 EMBEDDING_MODEL = "text-embedding-ada-002"
-GPT_MODEL = "gpt-3.5-turbo"
+GPT_MODEL = "gpt-4"
 
 def create_embeddings(input: str):
     return openai.Embedding.create(input=input, model="text-embedding-ada-002")["data"][0]["embedding"]
@@ -28,7 +28,7 @@ def relatedness_fn(x, y):
 
 
 def answer_question_for_value(app_name: str, value: str, eula: str):
-    query = f"""Use the below end user license agreement for {app_name} to determine how it affects someone who values {value}. Return the response as bullet points and nothing else.
+    query = f"""Use the below end user license agreement for {app_name} to determine how it affects someone who values {value}. Return the response as bullet points and nothing else. Prefix the bullet points with PRO if they are positive and CON if they are negative.
 
 \"\"\"
 {eula}
